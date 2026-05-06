@@ -1,0 +1,54 @@
+{
+  "skill_name": "mcat-scheduler",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I need to build a schedule for a new student. Start date: Sunday April 27, 2025. Exam date: August 18, 2025. Hours available: Mon–Fri 3 hrs/day (evenings), Sat 6 hrs, Sun 4 hrs. Total tutoring hours: 25. Tutoring sessions: Fridays at 10 AM. Subject strengths: Psychology/Behavioral Sciences. Subject weaknesses: Gen Chem and Physics. Non-AAMC materials: all 6 Kaplan books, Khan Academy. AAMC exams available: she has all 6 but has already completed exams 1–4, so only the Unscored Sample, Practice Exam 5, and Practice Exam 6 remain. No days off planned.",
+      "expected_output": "A complete .xlsx file named after the student with: Calendar sheet populated with Phase 1 Kaplan chapters (Gen Chem and Physics front-loaded due to weakness, Behavioral Sciences pushed to later weeks), Phase 2 AAMC assignments in strict order time-budgeted to ~50% of daily hours, FL tests on Saturdays/high-availability days, tutor sessions every Friday in blue font, full Kaplan chapter palette to the right with correct subject colors, formula-based date chain, and zero formula errors.",
+      "files": [],
+      "assertions": [
+        "The output is an .xlsx file",
+        "The Calendar sheet has a Kaplan chapter palette in columns J or beyond with 6 color-coded subject sections",
+        "Gen Chem and Physics chapters appear in the first half of Phase 1 (earlier weeks) due to subject weakness",
+        "Behavioral Sciences chapters appear later in Phase 1 due to subject strength",
+        "AAMC assignments appear in the Phase 2 portion of the schedule in the correct order starting with Chemistry and Physics Independent QB",
+        "FL Practice Tests (Unscored Sample, PE5, PE6) land on Saturday or Sunday columns",
+        "Friday cells throughout the schedule contain a Tutor Session label",
+        "No days are blocked since no days off were requested",
+        "The date cells use Excel formulas (=A4+7 pattern) rather than hardcoded date strings",
+        "The legend block appears in the header rows with correct color labels"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "New student schedule: Start Sunday June 1, 2025. Exam September 6, 2025. Hours: Mon/Wed/Fri 2 hrs, Tue/Thu 1 hr, Sat 5 hrs, Sun 0 hrs. Tutoring: 20 hours total, Thursday evenings at 7 PM. Strengths: Biology and Biochemistry. Weaknesses: Organic Chemistry and Behavioral Sciences. Has all Kaplan books, no other materials. Has all 6 AAMC practice exams, none completed. Vacation: July 4–6 (3 days off).",
+      "expected_output": "A complete .xlsx with July 4–6 blocked with 'Personal / Day Off' in light blue. Orgo and Behavioral Sciences chapters front-loaded. Bio/Biochem pushed to back of Phase 1. AAMC phase calculated dynamically — should start roughly 5–6 weeks before exam date given available hours. AAMC assignments time-budgeted to ~50% of each day's hours. FL exams on Saturdays. Thursday cells throughout show Tutor Session label.",
+      "files": [],
+      "assertions": [
+        "The output is an .xlsx file",
+        "Cells for July 4, 5, and 6 are filled with color FFCFE2F3 and labeled 'Personal / Day Off'",
+        "Organic Chemistry chapters appear in the first half of Phase 1",
+        "Biology and Biochemistry chapters appear in the latter portion of Phase 1",
+        "AAMC Phase 2 assignments begin in the correct order (Chemistry and Physics Independent QB first)",
+        "All 6 FL Practice Tests appear in the schedule on high-availability days",
+        "Thursday cells throughout show a Tutor Session label",
+        "The AAMC content that would have been on July 4–6 is redistributed to surrounding days"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I have a new student starting Sunday May 11, 2025, exam date July 21, 2025. Study hours: Mon–Fri 1.5 hrs/day, Sat 4 hrs, Sun 3 hrs. Tutoring: 15 hours total, Saturdays at 9 AM. Strengths: all subjects fairly balanced, slight edge in Biology. Weaknesses: slightly weaker in Physics. Has Kaplan Gen Chem, Physics, and Biology books only (not Orgo, Biochem, or Behavioral Sciences). Has AAMC Practice Exams 1–4 plus the Unscored Sample. No days off.",
+      "expected_output": "A schedule covering ~10 weeks. Phase 1 covers chapters for Gen Chem, Physics, and Biology (the only books owned — the palette still shows all 72 chapters but chapter assignments prioritize what she has). Physics chapters front-loaded. AAMC phase calculated to fit all assignments including Unscored Sample + PE1–PE4. Saturday cells show Tutor Session label for the morning, with remaining Saturday hours available for study. Zero formula errors.",
+      "files": [],
+      "assertions": [
+        "The output is an .xlsx file",
+        "The full Kaplan chapter palette appears to the right showing all 72 chapters across 6 subjects",
+        "Physics chapters appear in the earlier weeks of Phase 1 content",
+        "AAMC assignments appear in strict order (Chemistry and Physics Independent QB first)",
+        "The Unscored Sample Test and Practice Exams 1–4 appear as FL Practice Tests (PE5 and PE6 absent)",
+        "Saturday cells show a Tutor Session label",
+        "The schedule fits within the 10-week window (May 11 to July 21)"
+      ]
+    }
+  ]
+}
